@@ -19,11 +19,11 @@ const seedData = () => {
         // generate mock data for listings table for one listing
         const mockListing = {
           ownerName: faker.name.firstName(),
-          rating: faker.random.number({min: 1, max: 5}),
-          pricePerNight: faker.random.number({min: 100, max: 1500}),
-          minStayLength: faker.random.number({min: 1, max: 7}),
-          discountAmount: (faker.random.number({min: 1, max: 3}) === 1)
-            ? faker.random.number({min: 1, max: 50})
+          rating: faker.random.number({ min: 1, max: 5 }),
+          pricePerNight: faker.random.number({ min: 100, max: 1500 }),
+          minStayLength: faker.random.number({ min: 1, max: 7 }),
+          discountAmount: (faker.random.number({ min: 1, max: 3 }) === 1)
+            ? faker.random.number({ min: 1, max: 50 })
             : 0,
           discountDescription: faker.lorem.sentence(),
         };
@@ -37,7 +37,7 @@ const seedData = () => {
           const mockUD = {
             year: 2020,
             month: 8,
-            day: faker.random.number({min: 1, max: 31}),
+            day: faker.random.number({ min: 1, max: 31 }),
           };
 
           const queryStringUD = `INSERT INTO unavailableDates (year, month, day, id_listings) VALUES ('${mockUD.year}', '${mockUD.month}', '${mockUD.day}', '${i + 1}');`;
@@ -58,6 +58,8 @@ const seedData = () => {
       console.error(`Error inserting into database ${err}`);
     });
 };
+
+seedData();
 
 module.exports = {
   seedData,
