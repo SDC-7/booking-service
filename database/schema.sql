@@ -1,10 +1,10 @@
+-- DROP DATABASE IF EXISTS fecBookingDatabase;
 CREATE DATABASE IF NOT EXISTS fecBookingDatabase;
 
 USE fecBookingDatabase;
 
-DROP TABLE IF EXISTS listings;
 DROP TABLE IF EXISTS unavailableDates;
-DROP TABLE IF EXISTS bookings;
+DROP TABLE IF EXISTS listings;
 
 CREATE TABLE IF NOT EXISTS listings (
   id INT NOT NULL AUTO_INCREMENT,
@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS listings (
   pricePerNight INT NOT NULL,
   minStayLength INT NOT NULL,
   discountAmount INT,
-  discountDescription VARCHAR(200),
+  discountDescription VARCHAR(100),
   PRIMARY KEY (id)
 );
 
@@ -28,20 +28,3 @@ CREATE TABLE IF NOT EXISTS unavailableDates (
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );
-
-CREATE TABLE IF NOT EXISTS bookings (
-  id INT NOT NULL AUTO_INCREMENT,
-  yearStart INT NOT NULL,
-  monthStart INT NOT NULL,
-  dayStart INT NOT NULL,
-  yearEnd INT NOT NULL,
-  monthEnd INT NOT NULL,
-  dayEnd INT NOT NULL,
-  numGuests INT NOT NULL,
-  id_listings INT,
-  PRIMARY KEY (id),
-  FOREIGN KEY (id_listings) REFERENCES listings(id)
-    ON UPDATE CASCADE
-    ON DELETE CASCADE
-);
-
