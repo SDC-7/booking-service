@@ -1,17 +1,40 @@
 {
-  "name": "",
-  "version": "",
-  "description": "",
-  "author": "",
-  "license": "",
+  "name": "booking-service",
+  "description": "> Project description",
+  "author": "Jordan Pagni",
+  "license": "ISC",
   "engines": {
     "node": ">=6.13.0"
   },
   "scripts": {
+    "seed": "node database/seedData.js",
+    "start:dev": "nodemon server/index.js -w server -w database"
   },
   "dependencies": {
+    "express": "^4.17.1",
+    "faker": "^4.1.0",
+    "jquery": "^3.5.1",
+    "mariadb": "^2.4.2",
+    "path": "^0.12.7"
   },
   "devDependencies": {
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
-  }
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor.git",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-react": "^7.20.5",
+    "eslint-plugin-react-hooks": "^4.0.0",
+    "nodemon": "^2.0.4"
+  },
+  "version": "1.0.0",
+  "main": "server/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hrr47-fec8-webber/booking-service.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hrr47-fec8-webber/booking-service/issues"
+  },
+  "homepage": "https://github.com/hrr47-fec8-webber/booking-service#readme"
 }
