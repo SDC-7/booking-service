@@ -1,14 +1,8 @@
 const faker = require('faker');
 const mariadb = require('mariadb');
-const { dbLogin } = require('./login');
+const { dbConnectionOptions } = require('./login');
 
 const numberOfMockListings = 100;
-const dbConnectionOptions = {
-  host: dbLogin.host,
-  user: dbLogin.user,
-  password: dbLogin.password,
-  database: dbLogin.database,
-};
 
 const seedData = () => {
   const promiseArr = [];
