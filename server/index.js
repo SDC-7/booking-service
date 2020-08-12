@@ -5,7 +5,7 @@ const db = require('../database/helpers');
 const app = express();
 const port = 3002;
 
-app.use(express.static(path.join(__dirname, '../public')));
+app.use('/(:id)', express.static(path.join(__dirname, '../public')));
 
 app.get('/api/booking/:id', (req, res) => {
   const { id } = req.params;

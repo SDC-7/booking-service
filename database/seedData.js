@@ -41,7 +41,7 @@ const seedData = () => {
       }
     })
     .catch((err) => {
-      console.error(`Error creating connection to database ${err}`);
+      console.error(`Error creating connection to database: ${err}`);
     });
 
   Promise.all(promiseArr)
@@ -49,7 +49,7 @@ const seedData = () => {
       console.log('Successfully entered data into database');
     })
     .catch((err) => {
-      console.error(`Error inserting into database ${err}`);
+      console.error(`Error inserting into database: ${err}`);
     });
 };
 

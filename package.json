@@ -8,16 +8,27 @@
   },
   "scripts": {
     "seed": "node database/seedData.js",
-    "start:dev": "nodemon server/index.js -w server -w database"
+    "start:dev": "nodemon server/index.js -w server -w database",
+    "build:dev": "webpack --mode production"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "express": "^4.17.1",
     "faker": "^4.1.0",
     "jquery": "^3.5.1",
     "mariadb": "^2.4.2",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-axios": "^2.0.3",
+    "react-dom": "^16.13.1",
+    "styled-components": "^5.1.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/preset-env": "^7.11.0",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
     "eslint": "^7.2.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor.git",
@@ -25,7 +36,9 @@
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.20.5",
     "eslint-plugin-react-hooks": "^4.0.0",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
   },
   "version": "1.0.0",
   "main": "server/index.js",
