@@ -9,7 +9,8 @@
   "scripts": {
     "seed": "node database/seedData.js",
     "start:dev": "nodemon server/index.js -w server -w database",
-    "build:dev": "webpack --mode production"
+    "build:dev": "webpack --mode production",
+    "test": "jest"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -28,7 +29,12 @@
     "@babel/core": "^7.11.1",
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
+    "babel-jest": "^26.3.0",
     "babel-loader": "^8.1.0",
+    "chai": "^4.2.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.3",
+    "enzyme-to-json": "^3.5.0",
     "eslint": "^7.2.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor.git",
@@ -36,9 +42,46 @@
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.20.5",
     "eslint-plugin-react-hooks": "^4.0.0",
+    "jest": "^26.3.0",
     "nodemon": "^2.0.4",
+    "regenerator-runtime": "^0.13.7",
+    "sinon": "^9.0.3",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
+  },
+  "jest": {
+    "verbose": true,
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "client"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "collectCoverageFrom": [
+      "<rootDir>/client/__tests__/*.js",
+      "!<rootDir>/client/index.jsx"
+    ],
+    "coverageReporters": [
+      "text"
+    ],
+    "testRegex": "((\\.|/*.)(spec))\\.js?$",
+    "setupFilesAfterEnv": [
+      "<rootDir>/client/__tests__/jest.config.js"
+    ],
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
   },
   "version": "1.0.0",
   "main": "server/index.js",
