@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Guests = () => {
+const CheckInCheckOut = () => {
   const SimpleDiv = styled.div`
     font-size: 12px;
   `;
 
   return (
     <SimpleDiv>
-      GUESTS DROPDOWN
+      CHECK-IN CHECK-OUT DROPDOWN
     </SimpleDiv>
   );
 };
 
-export default Guests;
+export default CheckInCheckOut;

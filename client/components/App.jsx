@@ -2,9 +2,11 @@ import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 // eslint-disable-next-line import/extensions
-import Guests from './Guests.jsx';
+import IntroPriceAndRating from './IntroPriceAndRating.jsx';
+// eslint-disable-next-line import/extensions
+import MainBookingAndButton from './MainBookingAndButton.jsx';
 
-class Booking extends React.Component {
+class App extends React.Component {
   constructor() {
     super();
 
@@ -23,11 +25,11 @@ class Booking extends React.Component {
   fetchListingInfo(urlId) {
     axios.get(`/api/booking/${urlId}`)
       .then(({ data }) => {
-        console.log('Listings: ', data.listing);
-        console.log('Unavailable Dates: ', data.unavailableDates);
+        console.log('Listings: ', data.listing[0]);
+        console.log('Unavailable Dates: ', data.unavailableDates[0]);
         this.setState({
-          listing: data.listing,
-          unavailableDates: data.unavailableDates,
+          listing: data.listing[0],
+          unavailableDates: data.unavailableDates[0],
         });
       })
       .catch((err) => {
@@ -36,21 +38,27 @@ class Booking extends React.Component {
   }
 
   render() {
+    // NEED to remove margin later (used now for view space)
     const MainApp = styled.div`
       width: 325px;
-      height: 430px;
+      height: auto;
       padding: 24px;
+      margin-left: 400px;
       border: 1px solid rgb(221, 221, 221);
       border-radius: 12px;
       box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Circular Air Book', 'Circular Std Book', 'Roboto', sans-serif;
     `;
+
+    const { listing } = this.state;
+
     return (
       <MainApp>
-        <Guests />
+        <IntroPriceAndRating listing={listing} />
+        <MainBookingAndButton />
       </MainApp>
     );
   }
 }
 
-export default Booking;
+export default App;

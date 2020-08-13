@@ -1,10 +1,10 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme'; // may need shallow too
 import { spy } from 'sinon';
 import { expect } from 'chai';
-import axios from 'axios';
+// import axios from 'axios';
 // eslint-disable-next-line import/extensions
-import Booking from '../components/Booking.jsx';
+import App from '../components/App.jsx';
 
 describe('<Booking />', () => {
   let wrapper;
@@ -14,15 +14,15 @@ describe('<Booking />', () => {
   });
 
   it('calls componentDidMount', () => {
-    spy(Booking.prototype, 'componentDidMount');
-    wrapper = mount(<Booking />);
-    expect(Booking.prototype.componentDidMount).to.have.property('callCount', 1);
+    spy(App.prototype, 'componentDidMount');
+    wrapper = mount(<App />);
+    expect(App.prototype.componentDidMount).to.have.property('callCount', 1);
   });
 
   it('calls fetchListingInfo on mount', () => {
-    Booking.prototype.fetchListingInfo = jest.fn(); // creates mock function for API call
-    spy(Booking.prototype, 'fetchListingInfo');
-    wrapper = mount(<Booking />);
-    expect(Booking.prototype.fetchListingInfo).to.have.property('callCount', 1);
+    App.prototype.fetchListingInfo = jest.fn(); // creates mock function for API call
+    spy(App.prototype, 'fetchListingInfo');
+    wrapper = mount(<App />);
+    expect(App.prototype.fetchListingInfo).to.have.property('callCount', 1);
   });
 });

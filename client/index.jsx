@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // eslint-disable-next-line import/extensions
-import Booking from './components/Booking.jsx';
+import App from './components/App.jsx';
 
 // eslint-disable-next-line no-undef
-ReactDOM.render(<Booking />, document.getElementById('module-main'));
+ReactDOM.render(<App />, document.getElementById('module-main'));
