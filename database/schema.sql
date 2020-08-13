@@ -9,7 +9,8 @@ DROP TABLE IF EXISTS listings;
 CREATE TABLE IF NOT EXISTS listings (
   id INT NOT NULL AUTO_INCREMENT,
   ownerName VARCHAR(50) NOT NULL,
-  rating INT NOT NULL,
+  rating FLOAT NOT NULL,
+  numRatings INT NOT NULL,
   pricePerNight INT NOT NULL,
   minStayLength INT NOT NULL,
   discountAmount INT,
