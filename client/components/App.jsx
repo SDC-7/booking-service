@@ -3,9 +3,10 @@ import axios from 'axios';
 import styled from 'styled-components';
 // eslint-disable-next-line import/extensions
 import IntroPriceAndRating from './IntroPriceAndRating.jsx';
+// eslint-disable-next-line import/extensions
 import MainBookingAndButton from './MainBookingAndButton.jsx';
 
-class Booking extends React.Component {
+class App extends React.Component {
   constructor() {
     super();
 
@@ -60,4 +61,4 @@ class Booking extends React.Component {
   }
 }
 
-export default Booking;
+export default App;

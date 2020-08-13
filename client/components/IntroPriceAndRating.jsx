@@ -54,6 +54,7 @@ const IntroPriceAndRating = ({ listing }) => {
 
   return (
     <PricingAndRatingBar>
+
       <PricingSection>
         <PPN>
           {(listing.discountAmount !== 0) ? `$${listing.pricePerNight}` : null}
@@ -66,7 +67,7 @@ const IntroPriceAndRating = ({ listing }) => {
         </PerNight>
       </PricingSection>
       <RatingSection>
-        <img src={'../assets/airbnb_rating_star.png'} alt="rating star"></img>
+        <img src="../assets/airbnb_rating_star.png" alt="rating star" />
         <Rating>
           {listing.rating}
         </Rating>
@@ -74,6 +75,7 @@ const IntroPriceAndRating = ({ listing }) => {
           {`(${listing.numRatings})`}
         </NumRatings>
       </RatingSection>
+
     </PricingAndRatingBar>
   );
 };

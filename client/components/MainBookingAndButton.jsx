@@ -1,6 +1,6 @@
 import React from 'react';
-import Guests from './Guests.jsx';
 import styled from 'styled-components';
+// import Guests from './Guests.jsx';
 
 class MainBookingAndButton extends React.Component {
   constructor() {
@@ -48,12 +48,30 @@ class MainBookingAndButton extends React.Component {
       margin-top: 20px;
       border: 1px solid rgba(113, 113, 113, 0.7);
       border-radius: 10px;
-      `;
+    `;
 
-    const CheckInGridItem= styled.div`
+    const GridItemText = styled.p`
+      margin-block-start: 0;
+      margin-block-end: 0;
+      padding: 8px 0 0 8px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    `;
+
+    const CheckInGridItem = styled.div`
       grid-column: 1;
       grid-row: 1;
       height: 100%;
+    `;
+
+    const CheckDateSubText = styled(GridItemText)`
+      color: rgb(113, 113, 113);
+      padding-top: 4px;
+      font-size: 16px;
+      line-height: 18px;
+      font-weight: 300;
+      letter-spacing: 0;
     `;
 
     const CheckOutGridItem = styled.div`
@@ -70,18 +88,12 @@ class MainBookingAndButton extends React.Component {
       height: 100%;
     `;
 
-    const GuestsText = styled.p`
-      margin-block-start: 0;
-      margin-block-end: 0;
-      padding: 4px 0 0 4px;
-      font-size: 12px;
-      font-weight: 600;
-    `;
-
-    const GuestsSubText = styled(GuestsText)`
+    const GuestsSubText = styled(GridItemText)`
       padding-top: 0;
-      font-size: 14;
-      font-weight: 400;
+      font-size: 16px;
+      line-height: 18px;
+      font-weight: 300;
+      letter-spacing: 0;
     `;
 
     const Button = styled.button`
@@ -103,17 +115,36 @@ class MainBookingAndButton extends React.Component {
     return (
       <div>
         <BookingGrid>
-          <CheckInGridItem>CHECK-IN</CheckInGridItem>
-          <CheckOutGridItem>CHECK-OUT</CheckOutGridItem>
+
+          <CheckInGridItem>
+            <GridItemText>
+              CHECK-IN
+            </GridItemText>
+            <CheckDateSubText>
+              Add date
+            </CheckDateSubText>
+          </CheckInGridItem>
+
+          <CheckOutGridItem>
+            <GridItemText>
+              CHECK-OUT
+            </GridItemText>
+            <CheckDateSubText>
+              Add date
+            </CheckDateSubText>
+          </CheckOutGridItem>
+
           <GuestsGridItem>
-            <GuestsText>
+            <GridItemText>
               GUESTS
-            </GuestsText>
+            </GridItemText>
             <GuestsSubText>
               {guestSubTextString}
             </GuestsSubText>
           </GuestsGridItem>
+
         </BookingGrid>
+
         <Button>
           {(checkIn && checkOut) ? 'Reserve' : 'Check Availability'}
         </Button>
