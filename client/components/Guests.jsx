@@ -1,24 +1,16 @@
 import React from 'react';
+import styled from 'styled-components';
 
-class Guests extends React.Component {
-  constructor(props) {
-    super(props);
+const Guests = () => {
+  const SimpleDiv = styled.div`
+    font-size: 12px;
+  `;
 
-    this.state = {
-      guestsDropdown: false,
-    };
-  }
-
-  render() {
-    const { guestsDropdown } = this.state;
-    return (
-      <div>
-        <h3>
-          {`Guests: ${guestsDropdown}`}
-        </h3>
-      </div>
-    );
-  }
-}
+  return (
+    <SimpleDiv>
+      GUESTS DROPDOWN
+    </SimpleDiv>
+  );
+};
 
 export default Guests;

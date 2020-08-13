@@ -13,10 +13,6 @@ const IntroPriceAndRating = ({ listing }) => {
     justify-content: flex-start;
   `;
 
-  const RatingSection = styled(PricingAndRatingBar)`
-    justify-content: flex-end;
-  `;
-
   const PPN = styled.p`
     font-size: 22px;
     // font-weight: 600;
@@ -41,6 +37,21 @@ const IntroPriceAndRating = ({ listing }) => {
   `;
   const discountedAmount = Math.round(listing.pricePerNight * (1 - (listing.discountAmount / 100)));
 
+  const RatingSection = styled(PricingAndRatingBar)`
+    align-items: center;
+    justify-content: flex-end;
+  `;
+
+  const Rating = styled.div`
+    font-size: 15px;
+    letter-spacing: 1px;
+    padding-left: 4px;
+  `;
+
+  const NumRatings = styled(Rating)`
+    color: rgb(113, 113, 113);
+  `;
+
   return (
     <PricingAndRatingBar>
       <PricingSection>
@@ -55,7 +66,13 @@ const IntroPriceAndRating = ({ listing }) => {
         </PerNight>
       </PricingSection>
       <RatingSection>
-        {`${listing.rating} stars`}
+        <img src={'../assets/airbnb_rating_star.png'} alt="rating star"></img>
+        <Rating>
+          {listing.rating}
+        </Rating>
+        <NumRatings>
+          {`(${listing.numRatings})`}
+        </NumRatings>
       </RatingSection>
     </PricingAndRatingBar>
   );
