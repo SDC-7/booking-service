@@ -11,10 +11,11 @@ class Guests extends React.Component {
 
   render() {
     const { guestsDropdown } = this.state;
-    console.log(guestsDropdown);
     return (
       <div>
-        <h3>Guests</h3>
+        <h3>
+          {`Guests: ${guestsDropdown}`}
+        </h3>
       </div>
     );
   }

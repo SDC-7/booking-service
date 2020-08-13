@@ -2,7 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 // eslint-disable-next-line import/extensions
-import Guests from './Guests.jsx';
+import IntroPriceAndRating from './IntroPriceAndRating.jsx';
+import CheckInCheckOutGuests from './CheckInCheckOutGuests.jsx';
 
 class Booking extends React.Component {
   constructor() {
@@ -26,8 +27,8 @@ class Booking extends React.Component {
         console.log('Listings: ', data.listing);
         console.log('Unavailable Dates: ', data.unavailableDates);
         this.setState({
-          listing: data.listing,
-          unavailableDates: data.unavailableDates,
+          listing: data.listing[0],
+          unavailableDates: data.unavailableDates[0],
         });
       })
       .catch((err) => {
@@ -43,11 +44,13 @@ class Booking extends React.Component {
       border: 1px solid rgb(221, 221, 221);
       border-radius: 12px;
       box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Circular Std Book', 'Roboto', sans-serif;
     `;
+
     return (
       <MainApp>
-        <Guests />
+        <IntroPriceAndRating listing={this.state.listing}/>
+        <CheckInCheckOutGuests />
       </MainApp>
     );
   }
