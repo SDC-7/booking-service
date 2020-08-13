@@ -46,7 +46,7 @@ class Booking extends React.Component {
       border: 1px solid rgb(221, 221, 221);
       border-radius: 12px;
       box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
-      font-family: 'Circular Std Book', 'Roboto', sans-serif;
+      font-family: 'Circular Air Book', 'Circular Std Book', 'Roboto', sans-serif;
     `;
 
     const { listing } = this.state;
