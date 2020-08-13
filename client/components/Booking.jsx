@@ -15,6 +15,7 @@ class Booking extends React.Component {
   }
 
   componentDidMount() {
+    // eslint-disable-next-line no-undef
     const urlId = window.location.href.split('/')[3];
     this.fetchListingInfo(urlId);
   }
