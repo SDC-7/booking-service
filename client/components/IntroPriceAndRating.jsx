@@ -15,7 +15,6 @@ const IntroPriceAndRating = ({ listing }) => {
 
   const PPN = styled.p`
     font-size: 22px;
-    // font-weight: 600;
     line-height: 26px;
     padding-right: 4px;
     color: rgb(113, 113, 113);
@@ -63,7 +62,7 @@ const IntroPriceAndRating = ({ listing }) => {
           {`$${discountedAmount}`}
         </DiscountedPPN>
         <PerNight>
-          /night
+          / night
         </PerNight>
       </PricingSection>
       <RatingSection>

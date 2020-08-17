@@ -1,7 +1,8 @@
 import React from 'react';
+import Modal from 'react-bootstrap/Modal';
 import styled from 'styled-components';
 
-const Guests = () => {
+const Guests = (props) => {
   const SimpleDiv = styled.div`
     font-size: 12px;
   `;
