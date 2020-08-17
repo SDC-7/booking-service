@@ -17,29 +17,19 @@ const seedData = () => {
           rating: rating.toFixed(2),
           numRatings: faker.random.number({ min: 5, max: 50 }),
           pricePerNight: faker.random.number({ min: 100, max: 1500 }),
-          minStayLength: faker.random.number({ min: 1, max: 7 }),
           discountAmount: (faker.random.number({ min: 1, max: 2 }) === 1)
             ? faker.random.number({ min: 1, max: 50 })
             : 0,
-          discountDescription: faker.lorem.sentence(),
+          checkIn: `9/${faker.random.number({ min: 1, max: 15 })}/2020`,
+          checkOut: `9/${faker.random.number({ min: 16, max: 30 })}/2020`,
+          adults: faker.random.number({ min: 1, max: 5 }),
+          children: faker.random.number({ min: 0, max: 2 }),
+          infants: faker.random.number({ min: 0, max: 2 }),
         };
         // craft query string from mock data
-        const queryStringListing = `INSERT INTO listings (ownerName, rating, numRatings, pricePerNight, minStayLength, discountAmount, discountDescription) VALUES ('${mockListing.ownerName}', '${mockListing.rating}', '${mockListing.numRatings}', '${mockListing.pricePerNight}', '${mockListing.minStayLength}', '${mockListing.discountAmount}', '${mockListing.discountDescription}');`;
+        const queryStringListing = `INSERT INTO listings (ownerName, rating, numRatings, pricePerNight, discountAmount, checkIn, checkOut, adults, children, infants) VALUES ('${mockListing.ownerName}', '${mockListing.rating}', '${mockListing.numRatings}', '${mockListing.pricePerNight}', '${mockListing.discountAmount}', '${mockListing.checkIn}', '${mockListing.checkOut}', '${mockListing.adults}', '${mockListing.children}', '${mockListing.infants}');`;
         // push promise of querying to promise arr
         promiseArr.push(conn.query(queryStringListing));
-
-        // mock data for unavailable dates table for one listing (i)
-        for (let j = 0; j < Math.ceil(5 * Math.random()); j += 1) {
-          const mockUD = {
-            year: 2020,
-            month: 8,
-            day: faker.random.number({ min: 1, max: 31 }),
-          };
-
-          const queryStringUD = `INSERT INTO unavailableDates (year, month, day, id_listings) VALUES ('${mockUD.year}', '${mockUD.month}', '${mockUD.day}', '${i + 1}');`;
-
-          promiseArr.push(conn.query(queryStringUD));
-        }
       }
     })
     .catch((err) => {

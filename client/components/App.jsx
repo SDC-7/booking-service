@@ -12,7 +12,6 @@ class App extends React.Component {
 
     this.state = {
       listing: {},
-      unavailableDates: {},
     };
   }
 
@@ -25,11 +24,8 @@ class App extends React.Component {
   fetchListingInfo(urlId) {
     axios.get(`/api/booking/${urlId}`)
       .then(({ data }) => {
-        console.log('Listings: ', data.listing[0]);
-        console.log('Unavailable Dates: ', data.unavailableDates[0]);
         this.setState({
           listing: data.listing[0],
-          unavailableDates: data.unavailableDates[0],
         });
       })
       .catch((err) => {
@@ -40,7 +36,7 @@ class App extends React.Component {
   render() {
     // NEED to remove margin later (used now for view space)
     const MainApp = styled.div`
-      width: 325px;
+      width: 368px;
       height: auto;
       padding: 24px;
       margin-left: 400px;
@@ -55,7 +51,7 @@ class App extends React.Component {
     return (
       <MainApp>
         <IntroPriceAndRating listing={listing} />
-        <MainBookingAndButton />
+        <MainBookingAndButton listing={listing} />
       </MainApp>
     );
   }
