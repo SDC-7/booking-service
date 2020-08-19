@@ -34,12 +34,10 @@ class App extends React.Component {
   }
 
   render() {
-    // NEED to remove margin later (used now for view space)
     const MainApp = styled.div`
       width: 368px;
       height: auto;
       padding: 24px;
-      margin-left: 400px;
       border: 1px solid rgb(221, 221, 221);
       border-radius: 12px;
       box-shadow: rgba(0, 0, 0, 0.12) 0px 6px 16px;
