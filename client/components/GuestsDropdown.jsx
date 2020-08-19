@@ -17,6 +17,7 @@ class GuestsDropdown extends React.Component {
     };
 
     this._forceOpen = true;
+    this._inputWasClicked = true;
     this.inputWasClicked = this.inputWasClicked.bind(this);
     this.onClick = this.onClick.bind(this);
     this.onToggle = this.onToggle.bind(this);
@@ -110,6 +111,28 @@ class GuestsDropdown extends React.Component {
       width: 288px;
     `;
 
+    const GridItemText = styled.p`
+      margin-block-start: 0;
+      margin-block-end: 0;
+      padding: 11px 11px 0 11px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+    `;
+
+    const GuestsSubText = styled(GridItemText)`
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      padding-top: 4px;
+      padding-bottom: 11px;
+      font-size: 16px;
+      line-height: 18px;
+      font-weight: lighter;
+      letter-spacing: 0;
+      border: inherit;
+    `;
+
     const GuestPickerItem = styled.div`
       display: flex;
       flex-flow: row nowrap;
@@ -199,27 +222,25 @@ class GuestsDropdown extends React.Component {
         <Dropdown.Toggle
           variant="success"
           id="dropdown-basic"
-          aria-invalid="false"
-          aria-disabled="false"
           style={{
             width: '100%',
             'text-align': 'left',
             padding: '0',
-            color: 'black',
-            'background-color': 'white',
-            border: 'none',
+            color: 'rgb(34, 34, 34)',
+            border: 'inherit',
+            'background-color': 'transparent',
             cursor: 'pointer',
           }}
         >
-          {guestSubTextString}
+          <GridItemText>
+            GUESTS
+          </GridItemText>
+          <GuestsSubText>
+            {guestSubTextString}
+          </GuestsSubText>
         </Dropdown.Toggle>
 
-        <Dropdown.Menu
-          style={{
-            width: '500px !important',
-            'box-shadow': 'rgba(0, 0, 0, 0.15) 0px 2px 6px, rgba(0, 0, 0, 0.07) 0px 0px 0px 1px',
-          }}
-        >
+        <Dropdown.Menu>
           <GuestPickerGrid>
 
             <GuestPickerItem>
@@ -247,7 +268,7 @@ class GuestsDropdown extends React.Component {
                   )}
 
                 <SpecificGuestNumber>
-                  {this.state.guests.adults}
+                  {guests.adults}
                 </SpecificGuestNumber>
 
                 {(guests.adults + guests.children !== 13)

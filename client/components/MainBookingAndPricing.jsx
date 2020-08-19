@@ -1,14 +1,11 @@
+/* eslint-disable import/extensions */
 /* eslint-disable no-undef */
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-// eslint-disable-next-line import/extensions
-import ServiceFeeModal from './ServiceFeeModal.jsx';
-// eslint-disable-next-line import/extensions
-import DiscountModal from './DiscountModal.jsx';
-// eslint-disable-next-line import/extensions
-import PricePerNightModal from './PricePerNightModal.jsx';
-// eslint-disable-next-line import/extensions
+import ServiceFeeDropdown from './ServiceFeeDropdown.jsx';
+import DiscountDropdown from './DiscountDropdown.jsx';
+import PricePerNightDropdown from './PricePerNightDropdown.jsx';
 import GuestsDropdown from './GuestsDropdown.jsx';
 
 class MainBookingAndPricing extends React.Component {
@@ -20,9 +17,6 @@ class MainBookingAndPricing extends React.Component {
       isCheckOut: false,
       checkIn: null,
       checkOut: null,
-      serviceFeeRect: null,
-      discountRect: null,
-      pricePerNightRect: null,
     };
 
     this.handleInputDateChange = this.handleInputDateChange.bind(this);
@@ -72,9 +66,6 @@ class MainBookingAndPricing extends React.Component {
       isCheckOut,
       checkIn,
       checkOut,
-      serviceFeeRect,
-      discountRect,
-      pricePerNightRect,
     } = this.state;
 
     const numDays = (checkIn && checkOut)
@@ -96,6 +87,15 @@ class MainBookingAndPricing extends React.Component {
     const grandTotal = (numDays)
       ? totalBeforeDiscounts - discountAmountForNights + serviceFee
       : 0;
+
+    const formatDate = (d) => {
+      const date = new Date(d);
+      // always gives zero padded number
+      const month = (`0${date.getMonth() + 1}`).slice(-2);
+      const day = (`0${date.getDate() + 1}`).slice(-2);
+      const year = date.getFullYear();
+      return `${month}/${day}/${year}`;
+    };
 
     const BookingGrid = styled.div`
       display: grid;
@@ -154,20 +154,8 @@ class MainBookingAndPricing extends React.Component {
     const GuestsGridItem = styled.div`
       grid-column: 1 / 3;
       grid-row: 2;
-      padding-bottom: 11px;
       border-top: 1px solid rgba(113, 113, 113, 0.7);
       height: 100%;
-    `;
-
-    const GuestsSubText = styled(GridItemText)`
-      display: flex;
-      flex-flow: row nowrap;
-      justify-content: space-between;
-      padding-top: 4px;
-      font-size: 16px;
-      line-height: 18px;
-      font-weight: lighter;
-      letter-spacing: 0;
     `;
 
     const Button = styled.button`
@@ -240,7 +228,11 @@ class MainBookingAndPricing extends React.Component {
             </GridItemText>
             <CheckDateSubText>
               {(isCheckIn)
-                ? <CheckInputOnClickHandler className="checkInClick" onClick={this.handleOnClickDate}>{`${checkIn}`}</CheckInputOnClickHandler>
+                ? (
+                  <CheckInputOnClickHandler className="checkInClick" onClick={this.handleOnClickDate}>
+                    {`${formatDate(checkIn)}`}
+                  </CheckInputOnClickHandler>
+                )
                 : <CheckInputDatePicker className="checkInInput" onChange={this.handleInputDateChange} />}
             </CheckDateSubText>
           </CheckInGridItem>
@@ -251,38 +243,36 @@ class MainBookingAndPricing extends React.Component {
             </GridItemText>
             <CheckDateSubText>
               {(isCheckOut)
-                ? <CheckInputOnClickHandler className="checkOutClick" onClick={this.handleOnClickDate}>{`${checkOut}`}</CheckInputOnClickHandler>
+                ? (
+                  <CheckInputOnClickHandler className="checkOutClick" onClick={this.handleOnClickDate}>
+                    {`${formatDate(checkOut)}`}
+                  </CheckInputOnClickHandler>
+                )
                 : <CheckInputDatePicker className="checkOutInput" onChange={this.handleInputDateChange} />}
             </CheckDateSubText>
           </CheckOutGridItem>
 
           <GuestsGridItem>
-            <GridItemText>
-              GUESTS
-            </GridItemText>
-            <GuestsSubText>
-              <GuestsDropdown />
-            </GuestsSubText>
+            <GuestsDropdown />
           </GuestsGridItem>
 
         </BookingGrid>
 
         <Button>
-          {(checkIn && checkOut) ? 'Reserve' : 'Check Availability'}
+          {(checkIn && checkOut && (numDays > 0)) ? 'Reserve' : 'Check Availability'}
         </Button>
 
         <WontBeCharged>
           {'You won\'t be charged yet'}
         </WontBeCharged>
 
-        {(checkIn && checkOut)
+        {(checkIn && checkOut && (numDays > 0))
           ? (
             <PricingFlexContainer>
 
               <PricingFlexItem>
                 <PricingTitleText id="pricePerNight">
-                  <PricePerNightModal
-                    rect={pricePerNightRect}
+                  <PricePerNightDropdown
                     listing={listing}
                     numDays={numDays}
                   />
@@ -295,7 +285,7 @@ class MainBookingAndPricing extends React.Component {
                 ? (
                   <PricingFlexItem>
                     <PricingTitleText id="discount">
-                      <DiscountModal rect={discountRect} listing={listing} />
+                      <DiscountDropdown listing={listing} />
                     </PricingTitleText>
                     <PricingDiscountAmount>
                       {`-$${discountAmountForNights.toLocaleString()}`}
@@ -305,7 +295,7 @@ class MainBookingAndPricing extends React.Component {
                 : null}
               <PricingFlexItem>
                 <PricingTitleText id="serviceFee">
-                  <ServiceFeeModal rect={serviceFeeRect} />
+                  <ServiceFeeDropdown />
                 </PricingTitleText>
                 <PricingSubTotal>
                   {`$${(serviceFee).toLocaleString()}`}
