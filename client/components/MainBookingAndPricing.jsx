@@ -13,10 +13,8 @@ class MainBookingAndPricing extends React.Component {
     super(props);
 
     this.state = {
-      isCheckIn: false,
-      isCheckOut: false,
-      checkIn: null,
-      checkOut: null,
+      checkIn: 'Add date',
+      checkOut: 'Add date',
     };
 
     this.handleInputDateChange = this.handleInputDateChange.bind(this);
@@ -34,12 +32,10 @@ class MainBookingAndPricing extends React.Component {
   handleOnClickDate(e) {
     if (e.target.className.split(' ').indexOf('checkInClick') !== -1) {
       this.setState({
-        isCheckIn: false,
         checkIn: null,
       });
     } else if (e.target.className.split(' ').indexOf('checkOutClick') !== -1) {
       this.setState({
-        isCheckOut: false,
         checkOut: null,
       });
     }
@@ -49,12 +45,10 @@ class MainBookingAndPricing extends React.Component {
     if (e.target.className.split(' ').indexOf('checkInInput') !== -1) {
       this.setState({
         checkIn: e.target.value,
-        isCheckIn: true,
       });
     } else if (e.target.className.split(' ').indexOf('checkOutInput') !== -1) {
       this.setState({
         checkOut: e.target.value,
-        isCheckOut: true,
       });
     }
   }
@@ -62,8 +56,6 @@ class MainBookingAndPricing extends React.Component {
   render() {
     const { listing } = this.props;
     const {
-      isCheckIn,
-      isCheckOut,
       checkIn,
       checkOut,
     } = this.state;
@@ -89,6 +81,10 @@ class MainBookingAndPricing extends React.Component {
       : 0;
 
     const formatDate = (d) => {
+      if (d === 'Add date') {
+        return d;
+      }
+
       const date = new Date(d);
       // always gives zero padded number
       const month = (`0${date.getMonth() + 1}`).slice(-2);
@@ -124,8 +120,8 @@ class MainBookingAndPricing extends React.Component {
       height: 100%;
     `;
 
-    const CheckDateSubText = styled(GridItemText)`
-      color: {(checkIn) ? rgb(221, 221, 221) : rgb(113, 113, 113)};
+    const CheckInDateSubText = styled(GridItemText)`
+      color: ${(checkIn === 'Add date') ? 'rgb(113, 113, 113)' : 'rgb(34, 34, 34)'};
       padding-top: 4px;
       font-size: 16px;
       line-height: 18px;
@@ -133,9 +129,14 @@ class MainBookingAndPricing extends React.Component {
       letter-spacing: 0;
     `;
 
+    const CheckOutDateSubText = styled(CheckInDateSubText)`
+      color: ${(checkOut === 'Add date') ? 'rgb(113, 113, 113)' : 'rgb(34, 34, 34)'};
+    `;
+
     const CheckInputDatePicker = styled.input.attrs({
       type: 'date',
     })`
+      color: rgb(34, 34, 34);
       width: 90%;
       height: 80%;
       font-size: 12px;
@@ -226,30 +227,30 @@ class MainBookingAndPricing extends React.Component {
             <GridItemText>
               CHECK-IN
             </GridItemText>
-            <CheckDateSubText>
-              {(isCheckIn)
+            <CheckInDateSubText>
+              {(checkIn)
                 ? (
                   <CheckInputOnClickHandler className="checkInClick" onClick={this.handleOnClickDate}>
                     {`${formatDate(checkIn)}`}
                   </CheckInputOnClickHandler>
                 )
                 : <CheckInputDatePicker className="checkInInput" onChange={this.handleInputDateChange} />}
-            </CheckDateSubText>
+            </CheckInDateSubText>
           </CheckInGridItem>
 
           <CheckOutGridItem>
             <GridItemText>
               CHECKOUT
             </GridItemText>
-            <CheckDateSubText>
-              {(isCheckOut)
+            <CheckOutDateSubText>
+              {(checkOut)
                 ? (
                   <CheckInputOnClickHandler className="checkOutClick" onClick={this.handleOnClickDate}>
                     {`${formatDate(checkOut)}`}
                   </CheckInputOnClickHandler>
                 )
                 : <CheckInputDatePicker className="checkOutInput" onChange={this.handleInputDateChange} />}
-            </CheckDateSubText>
+            </CheckOutDateSubText>
           </CheckOutGridItem>
 
           <GuestsGridItem>
