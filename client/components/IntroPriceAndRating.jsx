@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import RatingStar from '../assets/airbnb_rating_star.png';
 
 const IntroPriceAndRating = ({ listing }) => {
   const PricingAndRatingBar = styled.div`
@@ -34,7 +35,6 @@ const IntroPriceAndRating = ({ listing }) => {
     line-height: 20px;
     padding-left: 4px;
   `;
-  const discountedAmount = Math.round(listing.pricePerNight * (1 - (listing.discountAmount / 100)));
 
   const RatingSection = styled(PricingAndRatingBar)`
     align-items: center;
@@ -51,6 +51,8 @@ const IntroPriceAndRating = ({ listing }) => {
     color: rgb(113, 113, 113);
   `;
 
+  const discountedAmount = Math.round(listing.pricePerNight * (1 - (listing.discountAmount / 100)));
+
   return (
     <PricingAndRatingBar>
 
@@ -66,7 +68,7 @@ const IntroPriceAndRating = ({ listing }) => {
         </PerNight>
       </PricingSection>
       <RatingSection>
-        <img src="../assets/airbnb_rating_star.png" alt="rating star" />
+        <img src={RatingStar} alt="rating star" />
         <Rating>
           {listing.rating}
         </Rating>
