@@ -11,8 +11,6 @@ CREATE TABLE IF NOT EXISTS listings (
   numRatings INT NOT NULL,
   pricePerNight INT NOT NULL,
   discountAmount INT,
-  checkIn VARCHAR(12) NOT NULL,
-  checkOut VARCHAR(12) NOT NULL,
   adults INT NOT NULL,
   children INT NOT NULL,
   infants INT NOT NULL,

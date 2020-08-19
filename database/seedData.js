@@ -20,14 +20,12 @@ const seedData = () => {
           discountAmount: (faker.random.number({ min: 1, max: 2 }) === 1)
             ? faker.random.number({ min: 1, max: 50 })
             : 0,
-          checkIn: `9/${faker.random.number({ min: 1, max: 15 })}/2020`,
-          checkOut: `9/${faker.random.number({ min: 16, max: 30 })}/2020`,
           adults: faker.random.number({ min: 1, max: 5 }),
           children: faker.random.number({ min: 0, max: 2 }),
           infants: faker.random.number({ min: 0, max: 2 }),
         };
         // craft query string from mock data
-        const queryStringListing = `INSERT INTO listings (ownerName, rating, numRatings, pricePerNight, discountAmount, checkIn, checkOut, adults, children, infants) VALUES ('${mockListing.ownerName}', '${mockListing.rating}', '${mockListing.numRatings}', '${mockListing.pricePerNight}', '${mockListing.discountAmount}', '${mockListing.checkIn}', '${mockListing.checkOut}', '${mockListing.adults}', '${mockListing.children}', '${mockListing.infants}');`;
+        const queryStringListing = `INSERT INTO listings (ownerName, rating, numRatings, pricePerNight, discountAmount, adults, children, infants) VALUES ('${mockListing.ownerName}', '${mockListing.rating}', '${mockListing.numRatings}', '${mockListing.pricePerNight}', '${mockListing.discountAmount}', '${mockListing.adults}', '${mockListing.children}', '${mockListing.infants}');`;
         // push promise of querying to promise arr
         promiseArr.push(conn.query(queryStringListing));
       }

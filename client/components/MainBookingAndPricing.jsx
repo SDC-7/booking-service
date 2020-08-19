@@ -8,53 +8,25 @@ import ServiceFeeModal from './ServiceFeeModal.jsx';
 import DiscountModal from './DiscountModal.jsx';
 // eslint-disable-next-line import/extensions
 import PricePerNightModal from './PricePerNightModal.jsx';
+// eslint-disable-next-line import/extensions
+import GuestsDropdown from './GuestsDropdown.jsx';
 
-class MainBookingAndButton extends React.Component {
+class MainBookingAndPricing extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      checkIn: props.listing.checkIn,
-      checkOut: props.listing.checkOut,
-      guests: {
-        adults: props.listing.adults,
-        children: props.listing.children,
-        infants: props.listing.infants,
-      },
+      isCheckIn: false,
+      isCheckOut: false,
+      checkIn: null,
+      checkOut: null,
       serviceFeeRect: null,
       discountRect: null,
       pricePerNightRect: null,
     };
-  }
 
-  componentDidMount() {
-    this.setState({
-      serviceFeeRect: document.getElementById('serviceFee').getBoundingClientRect(),
-      pricePerNightRect: document.getElementById('pricePerNight').getBoundingClientRect(),
-    });
-    // eslint-disable-next-line no-unused-expressions
-    (document.getElementById('discount'))
-      ? this.setState({
-        discountRect: document.getElementById('discount').getBoundingClientRect(),
-      })
-      : null;
-  }
-
-  getGuestSubTextString() {
-    const { guests } = this.state;
-    const guestString = ((guests.adults + guests.children) <= 1)
-      ? 'guest'
-      : 'guests';
-    const infantString = (guests.infants <= 1)
-      ? 'infant'
-      : 'infants';
-
-    let guestSubTextString = `${guests.adults + guests.children} ${guestString}`;
-    if (guests.infants) {
-      guestSubTextString += `, ${guests.infants} ${infantString}`;
-    }
-
-    return guestSubTextString;
+    this.handleInputDateChange = this.handleInputDateChange.bind(this);
+    this.handleOnClickDate = this.handleOnClickDate.bind(this);
   }
 
   getDaysBetweenDates() {
@@ -65,17 +37,45 @@ class MainBookingAndButton extends React.Component {
     return timeDifference / (1000 * 3600 * 24);
   }
 
+  handleOnClickDate(e) {
+    if (e.target.className.split(' ').indexOf('checkInClick') !== -1) {
+      this.setState({
+        isCheckIn: false,
+        checkIn: null,
+      });
+    } else if (e.target.className.split(' ').indexOf('checkOutClick') !== -1) {
+      this.setState({
+        isCheckOut: false,
+        checkOut: null,
+      });
+    }
+  }
+
+  handleInputDateChange(e) {
+    if (e.target.className.split(' ').indexOf('checkInInput') !== -1) {
+      this.setState({
+        checkIn: e.target.value,
+        isCheckIn: true,
+      });
+    } else if (e.target.className.split(' ').indexOf('checkOutInput') !== -1) {
+      this.setState({
+        checkOut: e.target.value,
+        isCheckOut: true,
+      });
+    }
+  }
+
   render() {
     const { listing } = this.props;
     const {
+      isCheckIn,
+      isCheckOut,
       checkIn,
       checkOut,
       serviceFeeRect,
       discountRect,
       pricePerNightRect,
     } = this.state;
-
-    const guestSubTextString = this.getGuestSubTextString();
 
     const numDays = (checkIn && checkOut)
       ? this.getDaysBetweenDates()
@@ -100,7 +100,7 @@ class MainBookingAndButton extends React.Component {
     const BookingGrid = styled.div`
       display: grid;
       width: auto;
-      height: 110px;
+      height: auto;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr 1fr;
       align-items: center;
@@ -112,7 +112,7 @@ class MainBookingAndButton extends React.Component {
     const GridItemText = styled.p`
       margin-block-start: 0;
       margin-block-end: 0;
-      padding: 11px 0 0 11px;
+      padding: 11px 11px 0 11px;
       font-size: 10px;
       font-weight: 600;
       letter-spacing: 1px;
@@ -133,6 +133,17 @@ class MainBookingAndButton extends React.Component {
       letter-spacing: 0;
     `;
 
+    const CheckInputDatePicker = styled.input.attrs({
+      type: 'date',
+    })`
+      width: 90%;
+      height: 80%;
+      font-size: 12px;
+      border: none;
+    `;
+
+    const CheckInputOnClickHandler = styled.p``; // using this to attach click handler
+
     const CheckOutGridItem = styled.div`
       grid-column: 2;
       grid-row: 1;
@@ -143,11 +154,15 @@ class MainBookingAndButton extends React.Component {
     const GuestsGridItem = styled.div`
       grid-column: 1 / 3;
       grid-row: 2;
+      padding-bottom: 11px;
       border-top: 1px solid rgba(113, 113, 113, 0.7);
       height: 100%;
     `;
 
     const GuestsSubText = styled(GridItemText)`
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
       padding-top: 4px;
       font-size: 16px;
       line-height: 18px;
@@ -224,9 +239,9 @@ class MainBookingAndButton extends React.Component {
               CHECK-IN
             </GridItemText>
             <CheckDateSubText>
-              {(checkIn)
-                ? `${checkIn}`
-                : 'Add Date'}
+              {(isCheckIn)
+                ? <CheckInputOnClickHandler className="checkInClick" onClick={this.handleOnClickDate}>{`${checkIn}`}</CheckInputOnClickHandler>
+                : <CheckInputDatePicker className="checkInInput" onChange={this.handleInputDateChange} />}
             </CheckDateSubText>
           </CheckInGridItem>
 
@@ -235,9 +250,9 @@ class MainBookingAndButton extends React.Component {
               CHECKOUT
             </GridItemText>
             <CheckDateSubText>
-              {(checkOut)
-                ? `${checkOut}`
-                : 'Add Date'}
+              {(isCheckOut)
+                ? <CheckInputOnClickHandler className="checkOutClick" onClick={this.handleOnClickDate}>{`${checkOut}`}</CheckInputOnClickHandler>
+                : <CheckInputDatePicker className="checkOutInput" onChange={this.handleInputDateChange} />}
             </CheckDateSubText>
           </CheckOutGridItem>
 
@@ -246,7 +261,7 @@ class MainBookingAndButton extends React.Component {
               GUESTS
             </GridItemText>
             <GuestsSubText>
-              {guestSubTextString}
+              <GuestsDropdown />
             </GuestsSubText>
           </GuestsGridItem>
 
@@ -260,54 +275,62 @@ class MainBookingAndButton extends React.Component {
           {'You won\'t be charged yet'}
         </WontBeCharged>
 
-        <PricingFlexContainer>
+        {(checkIn && checkOut)
+          ? (
+            <PricingFlexContainer>
 
-          <PricingFlexItem>
-            <PricingTitleText id="pricePerNight">
-              <PricePerNightModal rect={pricePerNightRect} listing={listing} numDays={numDays} />
-            </PricingTitleText>
-            <PricingSubTotal>
-              {`$${(totalBeforeDiscounts).toLocaleString()}`}
-            </PricingSubTotal>
-          </PricingFlexItem>
-          {(listing.discountAmount)
-            ? (
               <PricingFlexItem>
-                <PricingTitleText id="discount">
-                  <DiscountModal rect={discountRect} listing={listing} />
+                <PricingTitleText id="pricePerNight">
+                  <PricePerNightModal
+                    rect={pricePerNightRect}
+                    listing={listing}
+                    numDays={numDays}
+                  />
                 </PricingTitleText>
-                <PricingDiscountAmount>
-                  {`-$${discountAmountForNights.toLocaleString()}`}
-                </PricingDiscountAmount>
+                <PricingSubTotal>
+                  {`$${(totalBeforeDiscounts).toLocaleString()}`}
+                </PricingSubTotal>
               </PricingFlexItem>
-            )
-            : null}
-          <PricingFlexItem>
-            <PricingTitleText id="serviceFee">
-              <ServiceFeeModal rect={serviceFeeRect} />
-            </PricingTitleText>
-            <PricingSubTotal>
-              {`$${(serviceFee).toLocaleString()}`}
-            </PricingSubTotal>
-          </PricingFlexItem>
+              {(listing.discountAmount)
+                ? (
+                  <PricingFlexItem>
+                    <PricingTitleText id="discount">
+                      <DiscountModal rect={discountRect} listing={listing} />
+                    </PricingTitleText>
+                    <PricingDiscountAmount>
+                      {`-$${discountAmountForNights.toLocaleString()}`}
+                    </PricingDiscountAmount>
+                  </PricingFlexItem>
+                )
+                : null}
+              <PricingFlexItem>
+                <PricingTitleText id="serviceFee">
+                  <ServiceFeeModal rect={serviceFeeRect} />
+                </PricingTitleText>
+                <PricingSubTotal>
+                  {`$${(serviceFee).toLocaleString()}`}
+                </PricingSubTotal>
+              </PricingFlexItem>
 
-          <PricingGrandTotalFlexItem>
-            <PricingGrandTotal>
-              Total
-            </PricingGrandTotal>
-            <PricingGrandTotal>
-              {`$${grandTotal.toLocaleString()}`}
-            </PricingGrandTotal>
-          </PricingGrandTotalFlexItem>
+              <PricingGrandTotalFlexItem>
+                <PricingGrandTotal>
+                  Total
+                </PricingGrandTotal>
+                <PricingGrandTotal>
+                  {`$${grandTotal.toLocaleString()}`}
+                </PricingGrandTotal>
+              </PricingGrandTotalFlexItem>
 
-        </PricingFlexContainer>
+            </PricingFlexContainer>
+          )
+          : null}
       </div>
     );
   }
 }
 
-MainBookingAndButton.propTypes = {
+MainBookingAndPricing.propTypes = {
   listing: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
-export default MainBookingAndButton;
+export default MainBookingAndPricing;

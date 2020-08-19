@@ -1,8 +1,7 @@
 import React from 'react';
-import { mount } from 'enzyme'; // may need shallow too
+import { shallow, mount } from 'enzyme'; // may need shallow too
 import { spy } from 'sinon';
 import { expect } from 'chai';
-// import axios from 'axios';
 // eslint-disable-next-line import/extensions
 import App from '../components/App.jsx';
 
@@ -15,14 +14,14 @@ describe('<Booking />', () => {
 
   it('calls componentDidMount', () => {
     spy(App.prototype, 'componentDidMount');
-    wrapper = mount(<App />);
+    wrapper = shallow(<App />);
     expect(App.prototype.componentDidMount).to.have.property('callCount', 1);
   });
 
   it('calls fetchListingInfo on mount', () => {
     App.prototype.fetchListingInfo = jest.fn(); // creates mock function for API call
     spy(App.prototype, 'fetchListingInfo');
-    wrapper = mount(<App />);
+    wrapper = shallow(<App />);
     expect(App.prototype.fetchListingInfo).to.have.property('callCount', 1);
   });
 });

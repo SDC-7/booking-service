@@ -4,7 +4,7 @@ import styled from 'styled-components';
 // eslint-disable-next-line import/extensions
 import IntroPriceAndRating from './IntroPriceAndRating.jsx';
 // eslint-disable-next-line import/extensions
-import MainBookingAndButton from './MainBookingAndButton.jsx';
+import MainBookingAndPricing from './MainBookingAndPricing.jsx';
 
 class App extends React.Component {
   constructor() {
@@ -51,7 +51,7 @@ class App extends React.Component {
     return (
       <MainApp>
         <IntroPriceAndRating listing={listing} />
-        <MainBookingAndButton listing={listing} />
+        <MainBookingAndPricing listing={listing} />
       </MainApp>
     );
   }
