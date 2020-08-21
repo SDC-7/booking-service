@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import IntroPriceAndRating from './IntroPriceAndRating.jsx';
 // eslint-disable-next-line import/extensions
 import MainBookingAndPricing from './MainBookingAndPricing.jsx';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
   constructor() {
@@ -22,7 +23,7 @@ class App extends React.Component {
   }
 
   fetchListingInfo(urlId) {
-    axios.get(`/api/booking/${urlId}`)
+    axios.get(`http://localhost:3002/api/booking/${urlId}`)
       .then(({ data }) => {
         this.setState({
           listing: data.listing[0],
