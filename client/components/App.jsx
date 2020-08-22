@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import IntroPriceAndRating from './IntroPriceAndRating.jsx';
 // eslint-disable-next-line import/extensions
 import MainBookingAndPricing from './MainBookingAndPricing.jsx';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import '../assets/bootstrap.css';
 
 class App extends React.Component {
   constructor() {
