@@ -7,12 +7,13 @@ const app = express();
 const port = 3002;
 
 app.use(cors());
+app.use(express.json());
 app.use(express.static(path.join(__dirname, '../public')));
 app.use('/(:id)', express.static(path.join(__dirname, '../public')));
 
 app.get('/api/booking/:id', (req, res) => {
-  const { id } = req.params;
-  return db.queryTableDataFromID(id)
+  const args = req.params.id;
+  return db.getListingById(args)
     .then((listing) => {
       res.status(200).send(listing);
     })
@@ -20,6 +21,19 @@ app.get('/api/booking/:id', (req, res) => {
       res.status(500).send(`Error querying listing in database`);
     });
 });
+
+app.post('/api/booking/', (req, res) => {
+  const args = [req.body.ownerName, req.body.rating, req.body.numRatings, req.body.pricePerNight, req.body.discountAmount];
+  return db.postNewListing(args)
+    .then(() => {
+      res.status(200).send(`Success creating a new listing in database`);
+    })
+    .catch(() => {
+      res.status(500).send(`Error creating a new listing in database`);
+    });
+});
+
+
 
 app.get('/assets/airbnb_rating_star.png', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/assets/airbnb_rating_star.png'));
