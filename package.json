@@ -1,15 +1,17 @@
 {
   "name": "booking-service",
-  "description": "> Project description",
-  "author": "Jordan Pagni",
+  "description": "",
+  "author": "Cinzia Borello",
   "license": "ISC",
   "engines": {
     "node": ">=6.13.0"
   },
   "scripts": {
     "seed": "node database/seedData.js",
-    "start:dev": "nodemon server/index.js -w server -w database",
-    "build:dev": "webpack --mode production",
+    "start": "node server/index.js",
+    "build": "webpack --mode production",
+    "start:dev": "nodemon server/index.js",
+    "build:dev": "webpack -d --watch",
     "test": "jest"
   },
   "dependencies": {
@@ -18,7 +20,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "faker": "^4.1.0",
-    "mariadb": "^2.4.2",
+    "mysql": "^2.18.1",
     "path": "^0.12.7",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
@@ -98,10 +100,10 @@
   "main": "server/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hrr47-fec8-webber/booking-service.git"
+    "url": "git+https://github.com/SDC-7/booking-service.git"
   },
   "bugs": {
-    "url": "https://github.com/hrr47-fec8-webber/booking-service/issues"
+    "url": "https://github.com/SDC-7/booking-service/issues"
   },
-  "homepage": "https://github.com/hrr47-fec8-webber/booking-service#readme"
+  "homepage": "https://github.com/SDC-7/booking-service#readme"
 }
