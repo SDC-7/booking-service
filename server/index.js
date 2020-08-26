@@ -12,16 +12,13 @@ app.use('/(:id)', express.static(path.join(__dirname, '../public')));
 
 app.get('/api/booking/:id', (req, res) => {
   const { id } = req.params;
-  db.queryTableDataFromID(id, (listingErr, listing) => {
-    if (listingErr) {
-      console.error(`Error querying listing in database: ${listingErr}`);
-      res.status(500).send(listingErr);
-    } else {
-      res.status(200).send({
-        listing,
-      });
-    }
-  });
+  return db.queryTableDataFromID(id)
+    .then((listing) => {
+      res.status(200).send(listing);
+    })
+    .catch(() => {
+      res.status(500).send(`Error querying listing in database`);
+    });
 });
 
 app.get('/assets/airbnb_rating_star.png', (req, res) => {
