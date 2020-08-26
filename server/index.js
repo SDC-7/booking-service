@@ -33,7 +33,16 @@ app.post('/api/booking/', (req, res) => {
     });
 });
 
-
+app.put('/api/booking/:id', (req, res) => {
+  const args = [req.body.ownerName, req.body.rating, req.body.numRatings, req.body.pricePerNight, req.body.discountAmount, req.params.id];
+  return db.updateListing(args)
+    .then(() => {
+      res.status(200).send(`Success updating listing in database`);
+    })
+    .catch(() => {
+      res.status(500).send(`Error updating listing in database`);
+    });
+});
 
 app.get('/assets/airbnb_rating_star.png', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/assets/airbnb_rating_star.png'));

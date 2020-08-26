@@ -28,8 +28,21 @@ const postNewListing = (args) => {
   });
 };
 
+const updateListing = (args) => {
+  const queryString = `UPDATE listings SET ownerName = ?, rating = ?, numRatings = ?, pricePerNight = ?, discountAmount = ? WHERE id = ?;`;
+  return new Promise((resolve, reject) => {
+    connection.query(queryString, args, (err, data) => {
+      if (err) {
+        reject(err.message);
+      }
+      resolve(data);
+    });
+  });
+};
+
 
 module.exports = {
   getListingById,
   postNewListing,
+  updateListing,
 };
