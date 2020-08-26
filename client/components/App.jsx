@@ -26,7 +26,7 @@ class App extends React.Component {
     axios.get(`http://localhost:3002/api/booking/${urlId}`)
       .then(({ data }) => {
         this.setState({
-          listing: data.listing[0],
+          listing: data[0],
         });
       })
       .catch((err) => {
