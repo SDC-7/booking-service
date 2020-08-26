@@ -18,7 +18,7 @@ app.get('/api/booking/:id', (req, res) => {
       res.status(200).send(listing);
     })
     .catch(() => {
-      res.status(500).send(`Error querying listing in database`);
+      res.status(500).send(`Error retrieving listing in database`);
     });
 });
 
@@ -41,6 +41,17 @@ app.put('/api/booking/:id', (req, res) => {
     })
     .catch(() => {
       res.status(500).send(`Error updating listing in database`);
+    });
+});
+
+app.delete('/api/booking/:id', (req, res) => {
+  const args = [req.params.id];
+  return db.deleteListing(args)
+    .then(() => {
+      res.status(200).send(`Success deleting listing in database`);
+    })
+    .catch(() => {
+      res.status(500).send(`Error deleting listing in database`);
     });
 });
 

@@ -40,9 +40,22 @@ const updateListing = (args) => {
   });
 };
 
+const deleteListing = (args) => {
+  const queryString = `DELETE FROM listings WHERE id = ?;`;
+  return new Promise((resolve, reject) => {
+    connection.query(queryString, args, (err, data) => {
+      if (err) {
+        reject(err.message);
+      }
+      resolve(data);
+    });
+  });
+};
+
 
 module.exports = {
   getListingById,
   postNewListing,
   updateListing,
+  deleteListing,
 };
