@@ -1,6 +1,8 @@
 # LAirbnb Booking Module
 > This module powers the booking interface of a vacation rental website.
 
+![Alt ](/screenshots/LAirbnb_booking.png?raw=true "Booking interface")
+
 ## Related Projects
   - https://github.com/SDC-7/carousel-service
   - https://github.com/SDC-7/reviews-service
@@ -21,7 +23,6 @@ To initialize the page, in two separate terminal windows:
 npm start
 npm run build
 ```
-![Alt ](/screenshots/LAirbnb_booking.png?raw=true "Booking interface")
 
 ## Requirements
 - Node v12.18.1
@@ -41,7 +42,7 @@ npm install
 
 Use the following CRUD API routes for all requests to the server:
 
-POST /api/booking/
+#### POST /api/booking/
 A POST request to /api/booking/ will create a new listing to the database. The request body needs to include the following properties with corresponding values:
 - ownerName: string
 - rating: float
@@ -49,15 +50,21 @@ A POST request to /api/booking/ will create a new listing to the database. The r
 - pricePerNight: integer
 - discountAmount: integer
 
+
 ![Alt ](/screenshots/POST.png?raw=true "POST /api/booking/")
 
-GET /api/booking/:id
+
+#### GET /api/booking/:id
 A GET request to /api/booking/:id will retrieve an object containing information on the current listing.
+
 ![Alt ](/screenshots/GET.png?raw=true "GET /api/booking/:id")
 
-PUT /api/booking/:id
+
+#### PUT /api/booking/:id
 A PUT request to /api/booking/:id will update the existing listing record associated to that id. The request body needs to include the same properties required for the POST request.
+
 ![Alt ](/screenshots/UPDATE.png?raw=true "UPDATE /api/booking/:id")
 
-DELETE /api/booking/:id
+
+#### DELETE /api/booking/:id
 A DELETE request to /api/booking/:id will delete the existing listing record associated to that id.
