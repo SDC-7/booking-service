@@ -1,8 +1,7 @@
 /**
- * These rules enforce the Hack Reactor Style Guide
+ * These rules enforce the AirBnb Style Guide
+ * Refer to it at https://github.com/airbnb/javascript
  *
- * Visit this repo for more information:
- *   https://github.com/reactorcore/eslint-config-hackreactor
  */
 
 module.exports = {

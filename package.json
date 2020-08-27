@@ -1,6 +1,7 @@
 {
   "name": "booking-service",
-  "description": "",
+  "version": "2.0.0",
+  "description": "This module powers the booking interface of a vacation rental website.",
   "author": "Cinzia Borello",
   "license": "ISC",
   "engines": {
@@ -96,7 +97,6 @@
       "@babel/preset-react"
     ]
   },
-  "version": "1.0.0",
   "main": "server/index.js",
   "repository": {
     "type": "git",
