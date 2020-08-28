@@ -30,3 +30,5 @@ coverage
 build/
 dist/
 
+# Files
+listings.cvs
