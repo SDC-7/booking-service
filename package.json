@@ -8,8 +8,9 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "seed": "node database/seedData.js",
+    "schema": "psql postgres < postgres/psqlSchema.sql",
     "load": "node postgres/postgresLoader.js",
+    "seed": "node database/seedData.js",
     "start": "node server/index.js",
     "build": "webpack --mode production",
     "start:dev": "nodemon server/index.js",
