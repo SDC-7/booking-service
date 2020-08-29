@@ -9,6 +9,7 @@
   },
   "scripts": {
     "seed": "node database/seedData.js",
+    "load": "node postgres/postgresLoader.js",
     "start": "node server/index.js",
     "build": "webpack --mode production",
     "start:dev": "nodemon server/index.js",
@@ -23,6 +24,7 @@
     "faker": "^4.1.0",
     "mysql": "^2.18.1",
     "path": "^0.12.7",
+    "pg": "^8.3.3",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-axios": "^2.0.3",

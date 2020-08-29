@@ -13,6 +13,7 @@ logs
 
 # Login info for database
 database/dbconfig.js
+postgres/psqlconfig.js
 
 # Webpack bundle.js
 public/bundle.js
