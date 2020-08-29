@@ -11,31 +11,31 @@ const createOneListing = () => {
   const discount = faker.random.number({ min: 0, max: 50 });
 
   return `${host},${rating},${raters},${price},${discount}\n`;
-}
+};
 
 const startWriting = (writeStream, encoding, done) => {
   let i = 10000000;
   function writing() {
-    let canWrite = true;
+    const canWrite = true;
     while (i > 0 && canWrite) {
-      i--;
-      let listing = createOneListing();
+      i -= 1;
+      const listing = createOneListing();
 
-      if (i === 0){
+      if (i === 0) {
         writeStream.write(listing, encoding, done);
       } else {
         writeStream.write(listing, encoding);
       }
     }
 
-    if(i > 0 && !canWrite) {
+    if (i > 0 && !canWrite) {
       writeStream.once('drain', writing);
     }
   }
   writing();
-}
+};
 
-stream.write(`host,rating,raters,price,discount\n`, 'utf-8');
+stream.write('host,rating,raters,price,discount\n', 'utf-8');
 startWriting(stream, 'utf-8', () => {
   stream.end();
 });
