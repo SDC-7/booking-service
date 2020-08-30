@@ -1,8 +1,6 @@
-DROP DATABASE IF EXISTS lairbnb;
+CREATE DATABASE lairbnbbooking;
 
-CREATE DATABASE lairbnb;
-
-\c lairbnb;
+\c lairbnbbooking;
 
 CREATE TABLE IF NOT EXISTS listings (
   id SERIAL PRIMARY KEY,
@@ -14,5 +12,5 @@ CREATE TABLE IF NOT EXISTS listings (
 );
 
 /*  Create the schema from terminal by typing:
- *    psql postgres < postgres/psqlSchema.sql
+ *    npm run schema
 */
