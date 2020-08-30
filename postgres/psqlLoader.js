@@ -7,6 +7,6 @@ const dbConfig = require('./psqlconfig.js');
   await dbConfig.client.end();
 })();
 
-// INSERT INTO listings (host, rating, raters, price, discount) VALUES ('Cinzia', 3.12, 19, 150, 10);
-
-// COPY listings (host, rating, raters, price, discount) FROM '/Users/cinziaborello/hackreactor/SDC-LAirbnb/booking-service/listingsTest.csv' WITH CSV HEADER;
+/*  Load the data to Postgres from terminal by typing:
+ *    npm run load
+*/

@@ -12,5 +12,5 @@ CREATE TABLE IF NOT EXISTS listings (
 );
 
 /*  Create the schema from terminal by typing:
- *    psql postgres < postgres/psqlSchema.sql
+ *    npm run schema
 */
