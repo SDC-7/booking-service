@@ -9,7 +9,7 @@
   },
   "scripts": {
     "schema": "psql postgres < postgres/psqlSchema.sql",
-    "load": "node postgres/postgresLoader.js",
+    "load": "node postgres/psqlLoader.js",
     "seed": "node database/seedData.js",
     "start": "node server/index.js",
     "build": "webpack --mode production",
@@ -20,6 +20,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "bootstrap": "^3.3.7",
+    "cassandra-driver": "^4.6.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "faker": "^4.1.0",
