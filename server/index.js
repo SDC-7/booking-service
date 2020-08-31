@@ -1,7 +1,8 @@
 const express = require('express');
 const path = require('path');
-const db = require('../database/helpers');
 const cors = require('cors');
+// const db = require('../cassandra/query');
+const db = require('../postgres/query.js');
 
 const app = express();
 const port = 3002;
@@ -12,46 +13,12 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use('/(:id)', express.static(path.join(__dirname, '../public')));
 
 app.get('/api/booking/:id', (req, res) => {
-  const args = req.params.id;
-  return db.getListingById(args)
+  return db.getListingById(req.params.id)
     .then((listing) => {
       res.status(200).send(listing);
     })
     .catch(() => {
-      res.status(500).send(`Error retrieving listing in database`);
-    });
-});
-
-app.post('/api/booking/', (req, res) => {
-  const args = [req.body.ownerName, req.body.rating, req.body.numRatings, req.body.pricePerNight, req.body.discountAmount];
-  return db.postNewListing(args)
-    .then(() => {
-      res.status(200).send(`Success creating a new listing in database`);
-    })
-    .catch(() => {
-      res.status(500).send(`Error creating a new listing in database`);
-    });
-});
-
-app.put('/api/booking/:id', (req, res) => {
-  const args = [req.body.ownerName, req.body.rating, req.body.numRatings, req.body.pricePerNight, req.body.discountAmount, req.params.id];
-  return db.updateListing(args)
-    .then(() => {
-      res.status(200).send(`Success updating listing in database`);
-    })
-    .catch(() => {
-      res.status(500).send(`Error updating listing in database`);
-    });
-});
-
-app.delete('/api/booking/:id', (req, res) => {
-  const args = [req.params.id];
-  return db.deleteListing(args)
-    .then(() => {
-      res.status(200).send(`Success deleting listing in database`);
-    })
-    .catch(() => {
-      res.status(500).send(`Error deleting listing in database`);
+      res.status(500).send('Error retrieving listing in database');
     });
 });
 
@@ -60,4 +27,4 @@ app.get('/assets/airbnb_rating_star.png', (req, res) => {
 });
 
 app.listen(port);
-console.log('Now listening on port ', port);
+console.log('Listening on port ', port);
