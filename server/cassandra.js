@@ -1,8 +1,7 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-// const db = require('../cassandra/query');
-const db = require('../postgres/query.js');
+const db = require('../cassandra/query');
 
 const app = express();
 const port = 3002;

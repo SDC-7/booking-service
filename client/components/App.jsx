@@ -26,7 +26,13 @@ class App extends React.Component {
     axios.get(`http://localhost:3002/api/booking/${urlId}`)
       .then(({ data }) => {
         this.setState({
-          listing: data[0],
+          listing: {
+            ownerName: data.host,
+            rating: data.rating.toString().slice(0, 4),
+            numRatings: data.raters,
+            pricePerNight: data.price,
+            discountAmount: data.discount,
+          },
         });
       })
       .catch((err) => {
