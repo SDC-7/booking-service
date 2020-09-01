@@ -28,7 +28,7 @@ class App extends React.Component {
         this.setState({
           listing: {
             ownerName: data.host,
-            rating: data.rating,
+            rating: data.rating.toString().slice(0, 4),
             numRatings: data.raters,
             pricePerNight: data.price,
             discountAmount: data.discount,
