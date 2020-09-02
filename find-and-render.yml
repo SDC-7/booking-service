@@ -1,0 +1,12 @@
+config:
+  target: "http://localhost:3002"
+  phases:
+    - duration: 1
+      arrivalCount: 1000
+
+scenarios:
+  - name: "Find and render"
+    flow:
+      # Get the details of a listing:
+      - get:
+          url: "/api/booking/{{$randomNumber(1,10000000)}}"
