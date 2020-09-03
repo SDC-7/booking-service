@@ -11,7 +11,22 @@ config:
       arrivalCount: 1000
 
 scenarios:
-  - name: "Find and render"
+  - name: "GET one"
+    flow:
+      # Get the details of a listing:
+      - get:
+          url: "/api/booking/{{$randomNumber(1,10000000)}}"
+  - name: "GET ten"
+    flow:
+      # Get the details of a listing:
+      - get:
+          url: "/api/booking/{{$randomNumber(1,10000000)}}"
+  - name: "GET 100"
+    flow:
+      # Get the details of a listing:
+      - get:
+          url: "/api/booking/{{$randomNumber(1,10000000)}}"
+  - name: "GET 1000"
     flow:
       # Get the details of a listing:
       - get:
