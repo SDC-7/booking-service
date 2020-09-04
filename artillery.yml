@@ -1,0 +1,19 @@
+config:
+  target: "http://localhost:3002"
+  phases:
+    - duration: 60
+      arrivalCount: 10
+      name: Warm up
+    - duration: 60
+      arrivalCount: 100
+      name: Ramp up load
+    - duration: 60
+      arrivalCount: 1000
+      name: Sustained load
+
+
+scenarios:
+  - name: "GET one"
+    flow:
+      - get:
+          url: "/api/booking/{{$randomNumber(1,10000000)}}"
