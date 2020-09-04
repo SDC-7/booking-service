@@ -1,3 +1,4 @@
+// const dbConfig = require('./config.js');
 const dbConfig = require('./psqlconfig.js');
 
 dbConfig.client.connect();

@@ -1,8 +1,8 @@
-const dbConfig = require('./psqlconfig.js');
+const dbConfig = require('./config.js');
 
 (async () => {
   await dbConfig.client.connect();
-  await dbConfig.client.query("COPY listings (id, host, rating, raters, price, discount) FROM '/Users/cinziaborello/hackreactor/SDC-LAirbnb/booking-service/listings.csv' WITH CSV HEADER;");
+  await dbConfig.client.query(`COPY listings (id, host, rating, raters, price, discount) FROM '${pathname}/listings.csv' WITH CSV HEADER;`);
   console.log('done');
   await dbConfig.client.end();
 })();
