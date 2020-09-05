@@ -15,7 +15,7 @@ logs
 database/dbconfig.js
 postgres/psqlconfig.js
 cassandra/cqlconfig.js
-postgres/config.js
+postgres/awsConfig.js
 
 # Webpack bundle.js
 public/bundle.js
