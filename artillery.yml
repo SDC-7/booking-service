@@ -1,19 +1,44 @@
 config:
   target: "http://localhost:3002"
+  http:
+    pool: 50
   phases:
+    - duration: 20
+      arrivalRate: 1
+      name: Warm up, ramp to 10 RPS
+    - duration: 40
+      arrivalRate: 5
+      name: Ramp to 50 RPS
     - duration: 60
-      arrivalCount: 10
-      name: Warm up
+      arrivalRate: 5
+      rampTo: 10
+      name: Ramp to 100 RPS
     - duration: 60
-      arrivalCount: 100
-      name: Ramp up load
+      arrivalRate: 10
+      maxVusers: 10
+      name: Sustain load at 100 RPS
     - duration: 60
-      arrivalCount: 1000
-      name: Sustained load
-
-
+      arrivalRate: 20
+      rampTo: 50
+      maxVusers: 50
+      name: Ramp to 500 RPS
+    - duration: 60
+      arrivalRate: 50
+      maxVusers: 50
+      name: Sustain load at 500 RPS
+    - duration: 60
+      arrivalRate: 100
+      maxVusers: 100
+      rampTo: 100
+      name: Ramp to 1000 RPS
+    - duration: 60
+      arrivalRate: 100
+      maxVusers: 100
+      name: Sustain load at 1000 RPS
 scenarios:
-  - name: "GET one"
+  - name: "Get listing data"
     flow:
+    - loop:
       - get:
           url: "/api/booking/{{$randomNumber(1,10000000)}}"
+      count: 10
