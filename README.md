@@ -1,4 +1,4 @@
-# LAirbnb Booking Module
+# Vacay Booking Module
 > This module powers the booking interface of a vacation rental website.
 
 ![Alt ](/screenshots/LAirbnb_booking_1.png?raw=true "Booking interface, first rendered")
