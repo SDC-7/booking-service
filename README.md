@@ -1,7 +1,8 @@
 # LAirbnb Booking Module
 > This module powers the booking interface of a vacation rental website.
 
-![Alt ](/screenshots/LAirbnb_booking.png?raw=true "Booking interface")
+![Alt ](/screenshots/LAirbnb_booking_1.png?raw=true "Booking interface, first rendered")
+![Alt ](/screenshots/LAirbnb_booking_2.png?raw=true "Booking interface, dates selected")
 
 ## Related Projects
   - https://github.com/SDC-7/carousel-service
@@ -27,8 +28,8 @@ npm run build
 ## Requirements
 - Node v12.18.1
   - https://nodejs.org/
-- MySQL v5.7.31
-  - https://dev.mysql.com/
+- postgres (PostgreSQL) 12.4
+  - https://www.postgresql.org/
 
 ## Development
 
